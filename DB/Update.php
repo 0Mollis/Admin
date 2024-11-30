@@ -1,13 +1,6 @@
 <?php
 session_start();
-?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>изменение</title>
-</head>
-<body>
-<?php
+
 $db_host = "localhost";
 $db_user = "root";
 $db_password = "root";
@@ -35,7 +28,7 @@ if (isset($_SESSION["admin"])) {
 		$query = "SELECT `text` FROM lab2 WHERE id =".$id;
 		$result = mysqli_query($link,$query);
 		while ($rows = mysqli_fetch_array($result)) {
-			echo('<form method="POST"><textarea name="upd">'.$rows['text'].'</textarea><br><input type="submit" name="but"></form>');
+			echo('<form method="POST"><input type="button" onclick="kursiv()" value="k"><br><textarea name="upd" id="textaraes">'.$rows['text'].'</textarea><br><input type="submit" name="but"></form>');
 		}
 		$forUpdate = "Пусто";
 		if (isset($_POST["upd"])) {
@@ -50,5 +43,21 @@ else{
 	header("Location: index.php?id=1");
 }
 ?>
+<script type="text/javascript">
+	function kursiv() {
+		var select = document.getSelection().toString();
+		var it = select.italics();
+		select.deleteContents();
+		select.insertNode(document.createTextNode(it));
+		console.log(select);
+	}
+</script>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>изменение</title>
+</head>
+<body>
+
 </body>
 </html>
